@@ -72,7 +72,8 @@ def learn_mail(mail, learn_type):
     """
     out = ""
     orig_code = None
-    proc = utils.popen(["spamc", "--learntype=" + learn_type])
+    proc = utils.popen(
+        ["spamc", "--learntype=" + learn_type, "--max-size=64000000"])
     try:
         out = proc.communicate(imaputils.mail_content(mail))
         code = int(proc.returncode)

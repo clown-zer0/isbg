@@ -92,7 +92,8 @@ def new_message(body):
 
     if isinstance(body, bytes):
         try:
-            mail = email.message_from_bytes(body)  # pylint: disable=no-member
+            mail = email.message_from_bytes(body.decode('ascii', 
+                'backslashreplace').encode('ascii'))  # pylint: disable=no-member
             if mail.as_bytes() in [b'', b'\n']:
                 raise TypeError(
                     __("body '{}' cannot be empty.".format(repr(body))))
